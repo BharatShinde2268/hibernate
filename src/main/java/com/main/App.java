@@ -17,20 +17,30 @@ public class App
        Configuration cfg=new Configuration();
        cfg.configure("hibernate.cfg.xml");
        SessionFactory sf=cfg.buildSessionFactory();
+       Session session = sf.openSession();
        
        Student std=new Student();
-       std.setId(101);
+       std.setId(104);
        std.setName("Bharat Shinde");
        std.setCity("Renapur");
        std.setPhone("8007000562");
        System.out.println(std);
        
-       Session currentSession = sf.openSession();
-       Transaction tx = currentSession.beginTransaction();
-       currentSession.save(std);
+       
+       Student std1=new Student();
+       std.setId(105);
+       std.setName("khandu Shinde");
+       std.setCity("Renapur");
+       std.setPhone("9765616246");
+       System.out.println(std1);
+       
+       
+       Transaction tx = session.beginTransaction();
+       session.save(std);
+       session.save(std1);
        tx.commit();
        
-       currentSession.close();
+       session.close();
        
        
        
